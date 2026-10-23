@@ -7,8 +7,8 @@ params.T1   = 1200;    % K
 params.P1   = 1000;    % kPa
 params.P2   = 100;     % kPa
 params.k    = 1.4;
-params.cp   = 1.005;   % kJ/kg-K
 params.R    = 0.287;   % kJ/kg-K
+params.cp   = params.k/(params.k - 1) * params.R;   % was 1.005, not in line with with R and K
 params.T0   = 298.15;  % K
 params.mdot = 1.0;     % kg/s
 
