@@ -42,8 +42,7 @@ function res = computeTurbineModel(p, eta_t)
     % real exit
     res.T2      = p.T1 - eta_t .* (p.T1 - res.T2s);
     res.wActual = p.cp * (p.T1 - res.T2);
-    res.power   = p.mdot .* res.wActual;
-
+    res.power   = p.mdot .* eta_t .* res.ws;      %  eta*ws so check below isn't comparing to itself
     res.lostWork = res.ws - res.wActual;
 
     % 1st law check
@@ -60,19 +59,24 @@ function res = computeTurbineModel(p, eta_t)
 end
 
 function validateModel(res, p)
+    ok = true;
     if any(res.T2 < res.T2s - 1e-6) || any(res.T2 > p.T1 + 1e-6)
-        warning('temperature out of bounds');
+        warning('temperature out of bounds bro'); ok = false;
     end
     if any(res.wActual > res.ws + 1e-6) || any(res.wActual < 0)
-        warning('work out of bounds');
+        warning('work out of bounds bro'); ok = false;
     end
     if any(res.sgenSpecific < -1e-8)
-        warning('s_gen < 0, 2nd law violated');
+        warning('s_gen < 0, 2nd law violated'); ok = false;
     end
     if any(abs(res.energyResidual) > 1e-6)
-        warning('1st law residual not zero');
+        warning('1st law residual is not zero'); ok = false;
     end
-    disp('validation done');
+    if ok
+        disp('validation good/ok');
+    else
+        disp('hahaa validation failed, see warnings');
+    end
 end
 
 function generatePlots(eta_t, res)
