@@ -1,6 +1,11 @@
 % adiabatic air turbine, sweep efficiency, check 1st and 2nd law
 
 clear; clc; close all;
+% which plots to shw
+show.power      = true;
+show.entropy    = true;
+show.lostwork   = true;
+show.normalized = true;
 
 % inputs
 params.T1   = 1200;    % K
@@ -29,8 +34,10 @@ for i = idx
         results.exergyDestroyedSpecific(i), results.energyResidual(i));
 end
 
-generatePlots(eta_t, results);
-
+if show.power,      plotPower(eta_t, results);      end
+if show.entropy,    plotEntropy(eta_t, results);    end
+if show.lostwork,   plotLostWork(eta_t, results);   end
+if show.normalized, plotNormalized(eta_t, results); end
 
 % ---------- functions ----------
 
@@ -79,30 +86,38 @@ function validateModel(res, p)
     end
 end
 
-function generatePlots(eta_t, res)
-    figure('Name', 'Turbine', 'Color', 'w', 'Position', [150, 150, 1000, 700]);
-
-    subplot(2,2,1);
+function plotPower(eta_t, res)
+    figure('Name', 'Power', 'Color', 'w');
     plot(eta_t, res.power, 'b-', 'LineWidth', 2); grid on;
-    xlabel('\eta_t'); ylabel('Power [kW]');
+    xlabel('Turbine Isentropic Efficiency, $\eta_t$', 'Interpreter', 'latex');
+    ylabel('Shaft Power, $\dot{W}_t$ [kW]', 'Interpreter', 'latex');
     title('Power vs efficiency');
+end
 
-    subplot(2,2,2);
+function plotEntropy(eta_t, res)
+    figure('Name', 'Entropy generation', 'Color', 'w');
     plot(eta_t, res.SgenRate, 'r-', 'LineWidth', 2); grid on;
-    xlabel('\eta_t'); ylabel('S_{gen} [kW/K]');
+    xlabel('Turbine Isentropic Efficiency, $\eta_t$', 'Interpreter', 'latex');
+    ylabel('Entropy Generation, $\dot{S}_{gen}$ [kW/K]', 'Interpreter', 'latex');
     title('Entropy generation vs efficiency');
+end
 
-    subplot(2,2,3);
+function plotLostWork(eta_t, res)
+    figure('Name', 'Lost work', 'Color', 'w');
     plot(eta_t, res.exergyDestroyedRate, 'm-', 'LineWidth', 2); grid on;
-    xlabel('\eta_t'); ylabel('T0 * S_{gen} [kW]');
+    xlabel('Turbine Isentropic Efficiency, $\eta_t$', 'Interpreter', 'latex');
+    ylabel('$T_0 \dot{S}_{gen}$ [kW]', 'Interpreter', 'latex');
     title('T0*S_{gen} vs efficiency');
+end
 
-    subplot(2,2,4);
-    norm_work   = res.wActual / res.ws;
-    norm_exergy = res.exergyDestroyedSpecific / max(res.exergyDestroyedSpecific);
+function plotNormalized(eta_t, res)
+    figure('Name', 'Normalized', 'Color', 'w');
+    norm_work = res.wActual / res.ws;
+    norm_lost = res.exergyDestroyedSpecific / max(res.exergyDestroyedSpecific);
     plot(eta_t, norm_work, 'b-', 'LineWidth', 2); hold on;
-    plot(eta_t, norm_exergy, 'm--', 'LineWidth', 2); grid on;
-    xlabel('\eta_t'); ylabel('normalized');
-    title('work vs lost work');
-    legend('work', 'T0*S_{gen}', 'Location', 'best');
+    plot(eta_t, norm_lost, 'm--', 'LineWidth', 2); grid on;
+    xlabel('Turbine Isentropic Efficiency, $\eta_t$', 'Interpreter', 'latex');
+    ylabel('Normalized');
+    title('Work vs lost work');
+    legend({'work / ideal work', 'lost work / max lost work'}, 'Location', 'best');
 end
