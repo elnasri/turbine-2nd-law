@@ -16,3 +16,10 @@ I changed the isentropic efficiency and compute, for each value:
 - exit temperature and shaft power from the 1st law
 - entropy generation from the ideal gas entropy change
 - the work potential lost, given by surr temp. times entropy gen
+
+
+
+##
+- The 1st law can't tell a possible process from an impossible one.
+- Energy is conserved, but its ability to do work is not.
+The lower the efficiency, the further from the wall, and the more lost work.
