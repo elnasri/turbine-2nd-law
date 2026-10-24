@@ -19,7 +19,14 @@ I changed the isentropic efficiency and compute, for each value:
 
 
 
-##
-- The 1st law can't tell a possible process from an impossible one.
-- Energy is conserved, but its ability to do work is not.
-The lower the efficiency, the further from the wall, and the more lost work.
+## Results
+
+### T-s diagram at 60%
+![T-s diagram](ts_diagram.jpg)
+
+Vertical line is the ideal turbine (no entropy change). The dashed line
+is my real turbine, which ends at 853 K instead of 621 K. The 232 kW of
+missing shaft work is still in the air, and it splits into two parts: the red
+area (T0 * sgen, about 95 kW) can't be recovered or turned into work, and the blue area
+(about 138 kW) could still be recovered and used in principle.
+
