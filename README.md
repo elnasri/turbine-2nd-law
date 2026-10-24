@@ -38,7 +38,23 @@ Above 100% the 1st law residual is still zero, so the energy balance still accep
 it. But entropy gen goes negative (abt -0.21 kJ/kg-K at 120%), so the
 2nd law rejects it. 
 
-### Missing work vs efficiency
+### Cost of being away from the wall
+<img src="Work split.png" width="480" alt="Lost vs recoverable work as the turbine approaches the ideal">
 
-The lower the efficiency, the further from the wall (ideal), and the more lost work.
+This is my favorite plot. The whole height of the colored area is the
+missing work, the work the real turbine gives up or loses compared to the
+ideal one. It stays in the air as extra exhaust heat, so the 1st law is
+fine with it. The 2nd law splits it in two. The red part (t0 * s_gen) is the
+work potential lost to entropy generation, and the blue part could still be
+used in principle.
+
+At 50% efficiency about 290 kW is missing, and about 114 kW of that is lost.
+At 60% it is 232 kW, with 95 kW lost. As the efficiency goes up, the real
+turbine gets closer to the wall, and both colors shrink together until they reach zero at 100%.
+At the wall there is no entropy generation, so nothing is lost, and the
+real turbine is the ideal one, so there is no extra exhaust heat to
+recover either.
+
+Both colors shrink as efficiency goes up, but the red part of the missing work grows a little (about 39% at 50%, to about 48% near 100%), because the leftover exhaust heat is at a lower temperature and so is less usable
+
 
