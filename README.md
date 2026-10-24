@@ -1,4 +1,4 @@
-# Turbine second law
+# Second law analysis of an adiabatic air turbine
 
 A Matlab model of an adiabatic turbine, built to help me understand why the thermodynamics 2nd law still matters when the 1st law balances
 
