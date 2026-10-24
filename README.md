@@ -31,3 +31,9 @@ missing shaft work is still in the air, and it splits into two parts: the red
 area (T0 * sgen, about 95 kW) can't be recovered or turned into work, and the blue area
 (about 138 kW) could still be recovered and used in principle.
 
+### Moving Past 100% efficiency
+
+Above 100% the 1st law residual is still zero, so the energy balance still accepts
+it. But entropy gen goes negative (abt -0.21 kJ/kg-K at 120%), so the
+2nd law rejects it. 
+
