@@ -32,6 +32,7 @@ area (T0 * sgen, about 95 kW) can't be recovered or turned into work, and the bl
 (about 138 kW) could still be recovered and used in principle.
 
 ### Moving Past 100% efficiency
+<img src="Forbidden zone.png" width="480" alt="Forbidden zone">
 
 Above 100% the 1st law residual is still zero, so the energy balance still accepts
 it. But entropy gen goes negative (abt -0.21 kJ/kg-K at 120%), so the
