@@ -38,3 +38,7 @@ Above 100% the 1st law residual is still zero, so the energy balance still accep
 it. But entropy gen goes negative (abt -0.21 kJ/kg-K at 120%), so the
 2nd law rejects it. 
 
+### Missing work vs efficiency
+
+The lower the efficiency, the further from the wall (ideal), and the more lost work.
+
