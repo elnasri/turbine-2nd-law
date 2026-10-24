@@ -22,7 +22,8 @@ I changed the isentropic efficiency and compute, for each value:
 ## Results
 
 ### T-s diagram at 60%
-![T-s diagram](ts_diagram.jpg)
+
+<img src="ts_diagram.jpg" width="480" alt="T-s diagram at 60% efficiency">
 
 Vertical line is the ideal turbine (no entropy change). The dashed line
 is my real turbine, which ends at 853 K instead of 621 K. The 232 kW of
