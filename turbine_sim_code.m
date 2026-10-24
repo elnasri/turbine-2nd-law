@@ -148,11 +148,11 @@ function plotTsDiagram(p, eta)
     plot([0 0], [T2s p.T1], 'k-', 'LineWidth', 2);      % 1 -> 2s
     plot([0 sgen], [p.T1 T2], 'k--', 'LineWidth', 2);   % 1 -> 2
     plot(sc, Tc, 'k-', 'LineWidth', 2);                 % 100 kPa line
-    yline(p.T0, 'k:', 'T_0 (surroundings)');
-
-    text(0.01, p.T1, '  1',  'FontWeight', 'bold');
-    text(0.01, T2s,  '  2s', 'FontWeight', 'bold');
-    text(sgen, T2,   '  2',  'FontWeight', 'bold');
+    yline(p.T0, 'k:', 'T_0 (surroundings)', 'LabelHorizontalAlignment', 'left');
+        % offsets so labels dont sit on the lines
+    text(0.01,  p.T1 + 30, '1',  'FontWeight', 'bold');
+    text(0.012, T2s - 40,  '2s', 'FontWeight', 'bold');
+    text(sgen,  T2 + 30,   '2',  'FontWeight', 'bold');
     text(sgen/2, p.T0/2, sprintf('Lost = %.0f kW', p.mdot*lost), ...
          'HorizontalAlignment', 'center');
     text(sgen/2, (T2s + p.T0)/2, sprintf('Still recoverable = %.0f kW', p.mdot*rec), ...
