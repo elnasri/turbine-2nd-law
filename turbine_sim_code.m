@@ -6,6 +6,8 @@ show.power      = true;
 show.entropy    = true;
 show.lostwork   = true;
 show.normalized = true;
+show.Ts         = true;
+etaTs           = 0.60;    % efficiency for the t-s 
 
 % inputs
 params.T1   = 1200;    % K
@@ -38,6 +40,7 @@ if show.power,      plotPower(eta_t, results);      end
 if show.entropy,    plotEntropy(eta_t, results);    end
 if show.lostwork,   plotLostWork(eta_t, results);   end
 if show.normalized, plotNormalized(eta_t, results); end
+if show.Ts,         plotTsDiagram(params, etaTs);   end
 
 % ---------- functions ----------
 
@@ -120,4 +123,43 @@ function plotNormalized(eta_t, res)
     ylabel('Normalized');
     title('Work vs lost work');
     legend({'work / ideal work', 'lost work / max lost work'}, 'Location', 'best');
+end
+
+function plotTsDiagram(p, eta)
+    T2s  = p.T1 * (p.P2 / p.P1)^((p.k - 1) / p.k);
+    T2   = p.T1 - eta * (p.T1 - T2s);
+    sgen = p.cp * log(T2 / p.T1) - p.R * log(p.P2 / p.P1);
+
+    Tc = linspace(T2s, T2, 200);
+    sc = p.cp * log(Tc / T2s);      % entropy measured from 2s
+
+    lost  = p.T0 * sgen;            % kJ/kg
+    total = p.cp * (T2 - T2s);      % all the missing work
+    rec   = total - lost;           % still recoverable
+
+    figure('Name', 'T-s diagram', 'Color', 'w'); hold on;
+
+    % red = lost, blue = still recoverable
+    fill([0 sgen sgen 0], [0 0 p.T0 p.T0], [0.85 0.25 0.25], ...
+         'FaceAlpha', 0.6, 'EdgeColor', 'none');
+    fill([sc sgen 0], [Tc p.T0 p.T0], [0.3 0.6 0.9], ...
+         'FaceAlpha', 0.5, 'EdgeColor', 'none');
+
+    plot([0 0], [T2s p.T1], 'k-', 'LineWidth', 2);      % 1 -> 2s
+    plot([0 sgen], [p.T1 T2], 'k--', 'LineWidth', 2);   % 1 -> 2
+    plot(sc, Tc, 'k-', 'LineWidth', 2);                 % 100 kPa line
+    yline(p.T0, 'k:', 'T_0 (surroundings)');
+
+    text(0.01, p.T1, '  1',  'FontWeight', 'bold');
+    text(0.01, T2s,  '  2s', 'FontWeight', 'bold');
+    text(sgen, T2,   '  2',  'FontWeight', 'bold');
+    text(sgen/2, p.T0/2, sprintf('Lost = %.0f kW', p.mdot*lost), ...
+         'HorizontalAlignment', 'center');
+    text(sgen/2, (T2s + p.T0)/2, sprintf('Still recoverable = %.0f kW', p.mdot*rec), ...
+         'HorizontalAlignment', 'center');
+
+    xlabel('Entropy, $s - s_{2s}$ [kJ/kg-K]', 'Interpreter', 'latex');
+    ylabel('Temperature [K]');
+    title(sprintf('T-s diagram at \\eta_t = %.2f', eta));
+    ylim([0 1300]); xlim([-0.05 sgen*1.3]); grid on;
 end
