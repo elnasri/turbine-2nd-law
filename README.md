@@ -6,6 +6,7 @@ A Matlab model of an adiabatic turbine, built to help me understand why the ther
 
 In Thermo I, I could never build a solid physical intuition for the 2nd law beyond just plugging nums into formulas. I knew energy in and out was conserved like a strict scalar ledger, but I couldn't visualize why a process was forbidden from just running in reverse. When I modeled this turbine, the 1st law residual was zero at every efficiency, so we can infer all the energy was accounted for. But entropy generation says something was still "lost." If the energy is all still in the system( hot exhaust), what exactly does "lost" mean?
 
+
 ## The Model
 
 Air enters at 926.8 C and 1000 kPa and expands to 100 kPa at 1 kg/s mass flow rate. 
@@ -65,3 +66,29 @@ Both colors shrink as efficiency goes up, but the red part of the missing work g
 > decides which side of the wall you're on. For example an ideal turbine sits exactly
 > on it. Every real turbine sits to the left of it. Nothing can cross to
 > the right. The forbidden zone (2nd plot) plot is my way of visualizing it.
+
+
+
+
+## Limitations
+
+- **Efficiency is not predicted.** The model takes isentropic
+  efficiency as input. It shows the 2nd law given an efficiency,
+  not how to compute one from blade design or losses.
+
+- **Adiabatic assumption.** No heat transfer across the turbine boundary.
+  This means all entropy generation comes from internal irreversibilities,
+  and sgen equals the entropy change of the air directly.
+
+- **Constant cp, constant k, ideal gas.** Real air properties ofc vary with
+  temperature, so absolute numbers shift by some margin. Bur the qualitative
+  split between lost and recoverable work is unchanged.
+
+- **The 1st law residual is zero by construction in code.** T2 is set by the
+  efficiency definition, so the residual check confirms internal
+  consistency of the code, not a physical result. The 2nd law is what
+  rules out impossible efficiencies.
+
+- **My own visual framing.** The "wall," the T-s shading, the forbidden
+  zone plot and the work split plot are my way of drawing this, not standard textbook figures. The underlying quantities (T0 x s_gen, lost work
+  potential) are standard however.
