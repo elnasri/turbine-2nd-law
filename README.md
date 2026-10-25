@@ -31,9 +31,11 @@ eta_t   T2s [K]   T2 [K]   w_s      w_act    w_lost   s_gen    T0*s_gen  residua
 1.00    621.54    621.54   581.07   581.07    0.00    0.0000    0.00      0.00e+00
 ```
 > The residual is at most 1.14e-13, basically double precision rounding.
-MATLAB stores numbers to about 15-16 significant digits, so you get
-small leftovers when you chain operations like log and multiply. Not a real imbalance. 
-> At 100% efficiency sgen and T0*sgen are exactly zero, confirming the ideal turbine sits exactly on the wall.
+> MATLAB stores numbers to about 15-16 significant digits, so you get
+> small leftovers when you chain operations like log and multiply. Not a real imbalance.
+>
+> At 100% efficiency sgen and T0*sgen are exactly zero, confirming the
+> ideal turbine sits exactly on the wall.
 
 ## Results
 
