@@ -58,3 +58,10 @@ recover either.
 Both colors shrink as efficiency goes up, but the red part of the missing work grows a little (about 39% at 50%, to about 48% near 100%), because the leftover exhaust heat is at a lower temperature and so is less usable
 
 
+> **A note on "the wall":** this is my own way of thinking about the 2nd law, not a
+> textbook term. In Thermo I, I could do the 2nd law math but I couldn't
+> picture what it was actually doing. I started thinking of it as a wall:
+> the 1st law tells you how much energy in and out, but the 2nd law is what
+> decides which side of the wall you're on. For example an ideal turbine sits exactly
+> on it. Every real turbine sits to the left of it. Nothing can cross to
+> the right. The forbidden zone (2nd plot) plot is my way of visualizing it.
