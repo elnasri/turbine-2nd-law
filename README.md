@@ -18,7 +18,22 @@ I changed the isentropic efficiency and compute, for each value:
 - entropy generation from the ideal gas entropy change
 - the work potential lost, given by surr temp. times entropy gen
 
+## Code Output
 
+```
+validation ok
+
+eta_t   T2s [K]   T2 [K]   w_s      w_act    w_lost   s_gen    T0*s_gen  residual
+0.60    621.54    852.92   581.07   348.64   232.43   0.3179   94.78     -1.14e-13
+0.70    621.54    795.08   581.07   406.75   174.32   0.2474   73.75     -5.68e-14
+0.80    621.54    737.23   581.07   464.85   116.21   0.1715   51.12     -5.68e-14
+0.90    621.54    679.38   581.07   522.96   58.11    0.0894   26.65      0.00e+00
+1.00    621.54    621.54   581.07   581.07    0.00    0.0000    0.00      0.00e+00
+```
+> The residual is at most 1.14e-13, basically double precision rounding.
+MATLAB stores numbers to about 15-16 significant digits, so you get
+small leftovers when you chain operations like log and multiply. Not a real imbalance. 
+> At 100% efficiency sgen and T0*sgen are exactly zero, confirming the ideal turbine sits exactly on the wall.
 
 ## Results
 
